@@ -8,9 +8,6 @@ import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
 
-//Import DotEnv to handle .env files
-import io.github.cdimascio.dotenv.Dotenv;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +19,7 @@ public class Webhooks {
         // Load the .env file
         Dotenv dotenv = Dotenv.load();
         // Initialize the Nylas client
-        NylasClient nylas = new NylasClient.Builder(dotenv.get("V3_TOKEN")).apiUri(dotenv.get("BASE_URL")).build();
+        NylasClient nylas = new NylasClient.Builder(System.getenv("V3_TOKEN")).apiUri(System.getenv("BASE_URL")).build();
 
         // Default path when we load our web application
         get("/", (request, response) -> {
