@@ -34,10 +34,10 @@ public class Webhooks {
         post("/webhook", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode incoming_webhook = mapper.readValue(request.body(), JsonNode.class);
-            System.out.println(incoming_webhook);
+            System.out.println(incoming_webhook.get("data").get("object").get("calendar_id").textValue());
             Map<String, Object> model = new HashMap<>();
             model.put("webhooks", array);
-            return new ModelAndView(model, "show_emails.mustache");
+            return new ModelAndView(model, "show_webhooks.mustache");
         }, new MustacheTemplateEngine());
     }
 }
