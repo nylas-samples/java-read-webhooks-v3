@@ -16,8 +16,6 @@ public class Webhooks {
     public static void main(String[] args) {
         ArrayList<Webhook_Info> array = new ArrayList<Webhook_Info>();
 
-        // Load the .env file
-        Dotenv dotenv = Dotenv.load();
         // Initialize the Nylas client
         NylasClient nylas = new NylasClient.Builder(System.getenv("V3_TOKEN")).apiUri(System.getenv("BASE_URL")).build();
 
