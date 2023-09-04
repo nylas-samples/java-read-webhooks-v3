@@ -72,7 +72,9 @@ public class Webhooks {
                             event_datetime = "From " + startDate + " to " + endDate;
                             break;
                     }
-                    s_participant = new StringBuilder(s_participant.substring(1));
+                    if(s_participant.length() > 0){
+                        s_participant = new StringBuilder(s_participant.substring(1));    
+                    }
                     Webhook_Info new_webhook = new Webhook_Info();
                     new_webhook.setId(incoming_webhook.get("data").get("object").get("id").textValue());
                     new_webhook.setDate(event_datetime);
