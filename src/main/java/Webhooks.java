@@ -46,7 +46,11 @@ public class Webhooks {
         post("/webhook", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode incoming_webhook = mapper.readValue(request.body(), JsonNode.class);
+            System.out.println("Calendar Id: " + incoming_webhook.get("data").get("object").get("calendar_id").textValue() + " End of Calendar Id");
+            System.out.println("Env Calendar Id: " + System.getenv("CALENDAR_ID") + " End of Env Calendar Id");            
             if(Objects.equals(incoming_webhook.get("data").get("object").get("calendar_id").textValue(), System.getenv("CALENDAR_ID"))){
+                System.out.println("Secret: " + getHmac(request.body(), URLEncoder.encode(System.getenv("CLIENT_SECRET"), "UTF-8")) + " End of Secret");
+                System.out.println("Signature: " + request.headers("X-Nylas-Signature") + " End of Signature");                
                 if(getHmac(request.body(), URLEncoder.encode(System.getenv("CLIENT_SECRET"), "UTF-8")).equals(request.headers("X-Nylas-Signature"))){
                     FindEventQueryParams eventquery = new FindEventQueryParams(System.getenv("CALENDAR_ID"));
                     Response<Event> myevent =  nylas.events().find(System.getenv("GRANT_ID"), incoming_webhook.get("data").get("object").get("id").textValue(),eventquery);
