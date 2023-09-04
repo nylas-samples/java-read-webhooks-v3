@@ -64,8 +64,6 @@ public class Webhooks {
                         case "timespan":
                             String startDate = format.format(new Date(Long.parseLong(String.valueOf(timespan.getStartTime())) * 1000));
                             String endDate = format.format(new Date(Long.parseLong(String.valueOf(timespan.getEndTime())) * 1000));
-                            String startDate = format.format(timespan.getStartTime());
-                            String endDate = format.format(timespan.getEndTime());
                             event_datetime = "From " + startDate + " to " + endDate;
                             break;
                     }
