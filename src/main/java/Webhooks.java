@@ -46,11 +46,11 @@ public class Webhooks {
         }, new MustacheTemplateEngine());
 
         // Validate our webhook with the Nylas server
-        get("/webhook", (request, response) ->
+        get("/webhooks", (request, response) ->
                 request.queryParams("challenge"));
 
         // Getting webhook information
-        post("/webhook", (request, response) -> {
+        post("/webhooks", (request, response) -> {
                     // Create Json object mapper
                     ObjectMapper mapper = new ObjectMapper();
                     // Read the response body as a Json object
