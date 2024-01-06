@@ -34,7 +34,7 @@ public class Webhooks {
         ArrayList<Webhook_Info> array = new ArrayList<Webhook_Info>();
 
         // Initialize the Nylas client
-        NylasClient nylas = new NylasClient.Builder(System.getenv("V3_TOKEN")).apiUri(System.getenv("BASE_URL")).build();
+        NylasClient nylas = new NylasClient.Builder(System.getenv("V3_TOKEN")).build();
 
         // Default path when we load our web application
         get("/", (request, response) -> {
