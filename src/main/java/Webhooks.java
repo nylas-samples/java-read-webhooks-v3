@@ -55,8 +55,9 @@ public class Webhooks {
                     ObjectMapper mapper = new ObjectMapper();
                     // Read the response body as a Json object
                     JsonNode incoming_webhook = mapper.readValue(request.body(), JsonNode.class);
+                    System.out.println("" + incoming_webhook);
                     // Make sure we're reading our calendar
-                    if (Objects.equals(incoming_webhook.get("data").get("object").get("calendar_id").textValue(), System.getenv("CALENDAR_ID"))) {
+                    //if (Objects.equals(incoming_webhook.get("data").get("object").get("calendar_id").textValue(), System.getenv("CALENDAR_ID"))) {
                         // // Make sure the webhook is coming from Nylas
                         if (getHmac(request.body(), URLEncoder.encode(System.getenv("CLIENT_SECRET"), "UTF-8")).equals(request.headers("X-Nylas-Signature"))) {
                             // Read the event information using the events ednpoint
@@ -101,7 +102,7 @@ public class Webhooks {
                             // Add webhook call to an array, so that we display it on screen
                             array.add(new_webhook);
                         }
-                    }
+                    //}
                     return "";
                 }
             );
